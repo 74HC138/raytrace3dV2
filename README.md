@@ -18,20 +18,20 @@ The end goal of the project is to create a fully fledged raytracer with support 
 
 At this time this Github repo is mainly for sharing code between my laptop and desktop without using a flashdrive but here is the progress so far:
 
-[x] loading stl files
-[x] drawing 3d triangles
-[x] outputing the render to file
-[x] object and camera transformation
-[] "raytracing"
-[] texture mapping
-[] animation
-[] amiga port
+- [x] loading stl files
+- [x] drawing 3d triangles
+- [x] outputing the render to file
+- [x] object and camera transformation
+- [ ] "raytracing"
+- [ ] texture mapping
+- [ ] animation
+- [ ] amiga port
 
 **Amiga specifics**
 
-[] HAM-ify
-[] EHB-ify
-[] Offloading work to copper
-[] Switching to fixed point of float
-[] general optimisation for speed and memory usage
+- [ ] HAM-ify
+- [ ] EHB-ify
+- [ ] Offloading work to copper
+- [ ] Switching to fixed point of float
+- [ ] general optimisation for speed and memory usage
 
