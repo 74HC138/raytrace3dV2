@@ -2,6 +2,7 @@
 #include <iostream>
 #include <png++/png.hpp>
 #include "parse_stl.h"
+#include "loader.h"
 #include <malloc.h>
 
 #define WIDTH 500
@@ -14,12 +15,20 @@ png::image <png::rgb_pixel> image(WIDTH, HEIGHT);
 int main(int argc, char** argv) {
     std::string fileName;
     if (argc < 2) {
-        std::cout << "expected stl file as parameter!\n";
+        std::cout << "expected file as parameter!\n";
         return 1;
     }
 
     //load stl file
     fileName = argv[1];
+
+    loader::Loader load = loader::Loader(fileName);
+    int nObjects = load.nObjects;
+    std::cout << nObjects << " objects loaded\n";
+    std::cout << load.nFacets << " facets loaded\n";
+    trace::Object* objectList = load.objectList;
+
+    /*
     auto stlData = stl::parse_stl(fileName);
     if (stlData.triangles.size() <= 0) {
         std::cout << "file not found or corrupt\n";
@@ -45,6 +54,7 @@ int main(int argc, char** argv) {
         //std::cout << "normal vector: x:" << triangleList[i].n.x << " y:" << triangleList[i].n.y << " z:" << triangleList[i].n.z << "\n";
     }
     std::cout << "stl file loading complete -> rendering...\n";
+    */
 
     trace::Vector startPos = trace::Vector(0, 20, -50);
     for (int y = 0; y < HEIGHT; y++) {
@@ -54,7 +64,7 @@ int main(int argc, char** argv) {
             direction = direction.rotateX(0.5);
             trace::Ray r = trace::Ray(startPos, direction, 0);
             
-            image[y][x] = r.cast(objectList, 1).convertToPixel();
+            image[y][x] = r.cast(objectList, nObjects).convertToPixel();
         }
     }
 

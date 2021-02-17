@@ -12,6 +12,10 @@
 #define LIMIT_Z 500
 
 namespace trace {
+    class Color;
+    class Vector;
+    class Ray;
+    class Triangle3D;
     class Object;
 
     class Color {
@@ -67,6 +71,7 @@ namespace trace {
             Vector vertices[3];
             Triangle3D(Vector vertices[], Color color);
             Triangle3D(stl::triangle* triangle);
+            Triangle3D(Vector vert1, Vector vert2, Vector vert3, Color color);
             Vector intersectionTest(Ray* r);
             void recalculate();
     };

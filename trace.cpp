@@ -206,6 +206,36 @@ namespace trace {
         this->kBeta = -vertices[0].dot(this->uBeta);
         this->kGamma = -vertices[0].dot(this->uGamma);
     }
+    Triangle3D::Triangle3D(Vector vert1, Vector vert2, Vector vert3, Color color) {
+        this->vertices[0] = vert1;
+        this->vertices[1] = vert2;
+        this->vertices[2] = vert3;
+        this->color = color;
+        this->centerPoint = getCenterPoint(vertices, 3);
+        this->discrimRadius = getMaxDist(this->centerPoint, vertices, 3);
+        //magic wizzard jizzzz (source: https://www.uninformativ.de/bin/RaytracingSchnitttests-76a577a-CC-BY.pdf)
+        Vector b = vert2.minus(vert1);
+        Vector c = vert3.minus(vert1);
+
+        this->n = b.cross(c);
+        this->n.normalize();
+        this->d = this->n.dot(vertices[0]);
+
+        float bb = b.dot(b);
+        float bc = b.dot(c);
+        float cc = c.dot(c);
+
+        float D = 1.0 / (cc * bb - bc * cc);
+        float bbD = bb * D;
+        float bcD = bc * D;
+        float ccD = cc * D;
+
+        this->uBeta = b.times(ccD).minus(c.times(bcD));
+        this->uGamma = c.times(bbD).minus(b.times(bcD));
+
+        this->kBeta = -vertices[0].dot(this->uBeta);
+        this->kGamma = -vertices[0].dot(this->uGamma);
+    }
     Vector Triangle3D::intersectionTest(Ray* r) {
         Vector ret = r->origin;
         float rn = r->direction.dot(this->n);
