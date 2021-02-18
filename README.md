@@ -35,3 +35,9 @@ At this time this Github repo is mainly for sharing code between my laptop and d
 - [ ] Switching to fixed point of float
 - [ ] general optimisation for speed and memory usage
 
+## Credits
+
+I used code from these people:
+- OBJ parser from '[Bly7](https://github.com/Bly7)' found [here](https://github.com/Bly7/OBJ-Loader)
+- Math formula for raytracing addapted from java script [source](https://www.uninformativ.de/bin/
+RaytracingSchnitttests-76a577a-CC-BY.pdf)
